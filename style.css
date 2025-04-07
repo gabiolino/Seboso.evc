@@ -1,0 +1,72 @@
+
+body {
+    margin: 0;
+    background: radial-gradient(#1e1e1e, #000);
+    font-family: 'Arial Black', sans-serif;
+    color: #ffd700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.title {
+    margin: 30px 0 20px;
+    font-size: 2em;
+    text-align: center;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.video-container {
+    width: 90%;
+    max-width: 720px;
+    border: 4px solid red;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #ff0000aa;
+    animation: pulse 4s infinite;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 400px;
+}
+
+.flag {
+    width: 100%;
+    height: 40px;
+    background: url('https://i.imgur.com/MfN7gHx.png') repeat-x center;
+    background-size: contain;
+    animation: wave 3s linear infinite;
+}
+
+.sparks {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, yellow, transparent);
+    animation: sparkMove 2s linear infinite;
+}
+
+@keyframes wave {
+    0% { background-position-x: 0; }
+    100% { background-position-x: 1000px; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px #ff0000aa; }
+    50% { box-shadow: 0 0 30px #ff0000; }
+}
+
+@keyframes sparkMove {
+    0% { background-position: -100%; }
+    100% { background-position: 100%; }
+}
