@@ -1,97 +1,120 @@
-
-<!DOCTYPE html><html lang="pt-BR">
+  <!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Seboso.evc</title>
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+      background: radial-gradient(ellipse at center, #111 0%, #000 100%);
       overflow: hidden;
       font-family: 'Arial', sans-serif;
       color: white;
+    }
+
+    h1 {
       text-align: center;
-    }h1 {
-  margin-top: 40px;
-  font-size: 2.5em;
-  animation: float 3s ease-in-out infinite;
-}
+      font-size: 2.5rem;
+      margin-top: 40px;
+      text-shadow: 0 0 20px #f0f, 0 0 40px #0ff;
+    }
 
-.video-container {
-  position: relative;
-  margin: 40px auto;
-  width: 80%;
-  max-width: 720px;
-  z-index: 2;
-}
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+      z-index: 2;
+      position: relative;
+    }
 
-video {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-}
+    video {
+      width: 90%;
+      max-width: 720px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+    }
 
-/* Faíscas e Raios */
-.effect {
-  position: absolute;
-  background: radial-gradient(white, transparent);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  animation: sparkle 2s infinite ease-in-out;
-}
+    /* Sparks and lightning animation */
+    .effects {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-.lightning {
-  position: absolute;
-  width: 4px;
-  height: 60px;
-  background: yellow;
-  box-shadow: 0 0 10px yellow;
-  transform: rotate(20deg);
-  animation: lightningFlash 3s infinite;
-}
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: fly 3s linear infinite;
+      opacity: 0.8;
+    }
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1); }
-}
+    .lightning {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(to bottom, #0ff, #f0f);
+      opacity: 0.6;
+      animation: flicker 1s infinite;
+    }
 
-@keyframes lightningFlash {
-  0%, 95%, 100% { opacity: 0; }
-  96%, 98% { opacity: 1; }
-}
+    @keyframes fly {
+      from {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(100vh) translateX(20px);
+        opacity: 0;
+      }
+    }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
+    @keyframes flicker {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <h1>É simples mas é de coração</h1>  <div class="video-container">
-    <video autoplay muted loop>
-      <source src="lv_0_20250408103705.mp4" type="video/mp4" />
-      Seu navegador não suporta o vídeo.
+
+  <h1>É simples mas é de coração</h1>
+
+  <div class="video-container">
+    <video autoplay loop playsinline controls>
+      <source src="video-seboso.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
     </video>
-  </div>  <!-- Faíscas -->  <script>
-    for (let i = 0; i < 30; i++) {
+    <div class="effects" id="effects"></div>
+  </div>
+
+  <script>
+    // Criando faíscas
+    for (let i = 0; i < 40; i++) {
       const spark = document.createElement('div');
-      spark.className = 'effect';
+      spark.className = 'spark';
       spark.style.left = Math.random() * 100 + 'vw';
-      spark.style.top = (Math.random() * 60 + 20) + 'vh';
-      spark.style.animationDuration = (1 + Math.random() * 2) + 's';
-      document.body.appendChild(spark);
+      spark.style.top = Math.random() * 100 + 'vh';
+      spark.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.getElementById('effects').appendChild(spark);
     }
 
+    // Criando raios
     for (let i = 0; i < 10; i++) {
-      const bolt = document.createElement('div');
-      bolt.className = 'lightning';
-      bolt.style.left = Math.random() * 100 + 'vw';
-      bolt.style.top = (Math.random() * 60 + 20) + 'vh';
-      bolt.style.animationDelay = (Math.random() * 3) + 's';
-      document.body.appendChild(bolt);
+      const lightning = document.createElement('div');
+      lightning.className = 'lightning';
+      lightning.style.left = Math.random() * 100 + 'vw';
+      lightning.style.top = Math.random() * 80 + 'vh';
+      lightning.style.animationDelay = (Math.random() * 3) + 's';
+      document.getElementById('effects').appendChild(lightning);
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
